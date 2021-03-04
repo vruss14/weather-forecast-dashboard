@@ -12,10 +12,6 @@ if (timeOfDay > 9 && timeOfDay < 12) {
     pageHeader.textContent = "Good evening!";
 }
 
-// https://openweathermap.org/forecast5 (5 day forecast)
-// https://openweathermap.org/api/uvi (UV Index)
-// https://openweathermap.org/current (Current weather)
-
 let city = document.querySelector("#city-name");
 let temp = document.querySelector("#city-temp");
 let humidity = document.querySelector("#city-humidity");
@@ -45,14 +41,32 @@ searchForm.addEventListener("submit", runSearch);
 // Function that creates a button for each past search. These should be stored locally
 // Clicking one of these buttons should run the search again for the textcontent (city)
 
+let searchBtnArray = [];
+let searchWrapper = document.querySelector("#search-wrapper");
+
 function saveSearch (userInput) {
-    let searchWrapper = document.querySelector("#search-wrapper");
-    let searchBtn = document.createElement("button");
-    searchBtn.textContent = userInput;
-    searchBtn.setAttribute("style", "background-color: lightgray; text-align: center; margin-bottom: 5px;");
-    searchBtn.setAttribute("class", "pastsearch");
-    searchWrapper.append(searchBtn);
-    //searchBtn.on("click", ".pastsearch", btnSearch); ERROR: searchBtn.on is not a function
+        let searchBtn = document.createElement("button");
+        searchBtn.textContent = userInput;
+        searchBtnArray.push(searchBtn.innerHTML);
+        console.log(searchBtnArray);
+        localStorage.setItem("searches", searchBtnArray);
+}
+
+displayOldSearches();
+
+function displayOldSearches () {
+    let retrievedSearches = localStorage.getItem("searches");
+    console.log(retrievedSearches);
+
+    //Console appears normal; buttons not displaying on page
+
+    for (let i=0; i < searchBtnArray.length; i++) {
+        let search = searchBtnArray[i];
+        let btn = document.createElement("button");
+        btn.textContent = search;
+        btn.setAttribute("class", ".pastsearch");
+        searchWrapper.append(btn);
+    }
 }
 
 // Need to use event delegation when a dynamically created button has been clicked so that the
@@ -61,12 +75,8 @@ function saveSearch (userInput) {
 function btnSearch (event) {
     let btnClicked = $(event.target);
     let searchAgain = btnClicked.textContent;
-    console.log(searchAgain);
     document.querySelector("#search-value").value = searchAgain;
     let userInput = searchAgain;
-
-    console.log(searchAgain);
-    console.log(userInput);
 
     pullApiForecast (userInput);
     pull5DayForecast (userInput);
@@ -83,8 +93,6 @@ fetch(requestCurrentForecast)
         return response.json();
     })
     .then(function (response) {
-
-        console.log(response);
 
         city.textContent = " " + response.name + " (" + moment().format("MM/DD/YYYY") + ")";
 
@@ -107,8 +115,6 @@ fetch(requestCurrentForecast)
                 return response.json();
             })
             .then(function(response) {
-                console.log(response);
-                console.log(response.value);
                 uv.textContent = " " + response.value;
 
                 let currentUVIndex = parseFloat(response.value);
@@ -125,7 +131,6 @@ fetch(requestCurrentForecast)
 }
 
 // Displays 5 day forecast fetched results 
-// Pictures need third-party cookie issues resolved
 
 function pull5DayForecast(userInput) {
     let request5DayForecast = "https://api.openweathermap.org/data/2.5/forecast?q=" + userInput + "&appid=e1347dac2254285ce9931aa3ec7dcb90" + "&units=imperial";
