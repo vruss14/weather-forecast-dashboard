@@ -152,106 +152,23 @@ function pull5DayForecast(userInput) {
             return response.json();
         })
         .then(function(response) {
+            console.log(response)
 
-            //Displaying results for day 1 of the 5 day forecast
+            //Display results for each day in the 5 day forecast
 
-            let day1 = parseInt(response.list[6].dt);
-            let formatDay1 = moment.unix(day1).format("MM/DD/YYYY");
-
-            let date1 = document.getElementById("date1");
-            date1.textContent = (formatDay1);
-
-            let weather1 = document.getElementById("weather1");
-            weather1.textContent = response.list[6].weather[0].main;
-
-            let weatherIcon1 = document.getElementById("weatherIcon1");
-            weatherIcon1.setAttribute("src", "http://openweathermap.org/img/w/" + response.list[6].weather[0].icon + ".png");
-            weatherIcon1.setAttribute ("cookie", "SameSite=Strict");
-
-            let temp1 = document.getElementById("temp1");
-            temp1.textContent = response.list[6].main.temp + "°F";
-
-            let humidity1 = document.getElementById("humidity1");
-            humidity1.textContent = response.list [6].main.humidity + "%";
-
-            //Displaying results for day 2 of the 5 day forecast
+            response.list.filter((hour, i) => (i+12)%8 === 0).forEach((hour, i) => {
+            const dayCount = i+1;
+            let formatDay = moment.unix(parseInt(hour.dt)).format("MM/DD/YYYY");
             
-            let day2 = parseInt(response.list[14].dt);
-            let formatDay2 = moment.unix(day2).format("MM/DD/YYYY");
+            document.getElementById(`date${dayCount}`).textContent = (formatDay);
 
-            let date2 = document.getElementById("date2");
-            date2.textContent = (formatDay2);
+            document.getElementById(`weather${dayCount}`).textContent = hour.weather[0].main;
 
-            let weather2 = document.getElementById("weather2");
-            weather2.textContent = response.list[14].weather[0].main;
+            document.getElementById(`weatherIcon${dayCount}`).setAttribute("src", "http://openweathermap.org/img/w/" + hour.weather[0].icon + ".png");
+           
+            document.getElementById(`temp${dayCount}`).textContent = hour.main.temp + "°F";
 
-            let weatherIcon2 = document.getElementById("weatherIcon2");
-            weatherIcon2.setAttribute("src", "http://openweathermap.org/img/w/" + response.list[14].weather[0].icon + ".png");
-
-            let temp2 = document.getElementById("temp2")
-            temp2.textContent = response.list[14].main.temp + "°F";
-
-            let humidity2 = document.getElementById("humidity2");
-            humidity2.textContent = response.list[14].main.humidity + "%";
-
-            //Displaying results for day 3 of the 5 day forecast
-
-            let day3 = parseInt(response.list[22].dt);
-            let formatDay3 = moment.unix(day3).format("MM/DD/YYYY");
-
-            let date3 = document.getElementById("date3");
-            date3.textContent = (formatDay3);
-
-            let weather3 = document.getElementById("weather3");
-            weather3.textContent = response.list[22].weather[0].main;
-
-            let weatherIcon3 = document.getElementById("weatherIcon3")
-            weatherIcon3.setAttribute("src", "http://openweathermap.org/img/w/" + response.list[22].weather[0].icon + ".png");
-
-            let temp3 = document.getElementById("temp3");
-            temp3.textContent = response.list[22].main.temp + "°F";
-
-            let humidity3 = document.getElementById("humidity3");
-            humidity3.textContent = response.list[22].main.humidity + "%";
-
-            //Displaying results for day 4 of the 5 day forecast
-
-            let day4 = parseInt(response.list[30].dt);
-            let formatDay4 = moment.unix(day4).format("MM/DD/YYYY");
-
-            let date4 = document.getElementById("date4");
-            date4.textContent = (formatDay4);
-
-            let weather4 = document.getElementById("weather4");
-            weather4.textContent = response.list[30].weather[0].main;
-
-            let weatherIcon4 = document.getElementById("weatherIcon4");
-            weatherIcon4.setAttribute("src", "http://openweathermap.org/img/w/" + response.list[30].weather[0].icon + ".png");
-
-            let temp4 = document.getElementById("temp4");
-            temp4.textContent = response.list[30].main.temp + "°F";
-
-            let humidity4 = document.getElementById("humidity4")
-            humidity4.textContent = response.list[30].main.humidity + "%";
-
-            //Displaying results for day 5 of the 5 day forecast
-
-            let day5 = parseInt(response.list[38].dt);
-            let formatDay5 = moment.unix(day5).format("MM/DD/YYYY");
-
-            let date5 = document.getElementById("date5");
-            date5.textContent = (formatDay5);
-
-            let weather5 = document.getElementById("weather5");
-            weather5.textContent = response.list[38].weather[0].main;
-
-            let weatherIcon5 = document.getElementById("weatherIcon5");
-            weatherIcon5.setAttribute("src", "http://openweathermap.org/img/w/" + response.list[38].weather[0].icon + ".png");
-
-            let temp5 = document.getElementById("temp5");
-            temp5.textContent = response.list[38].main.temp + "°F";
-
-            let humidity5 = document.getElementById("humidity5");
-            humidity5.textContent = response.list[38].main.humidity + "%";
-        })
+            document.getElementById(`humidity${dayCount}`).textContent = hour.main.humidity + "%";
+        }) 
+    })
 }
