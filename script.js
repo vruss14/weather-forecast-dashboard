@@ -34,38 +34,51 @@ function runSearch (event) {
     pullApiForecast (userInput);
     pull5DayForecast (userInput);
     saveSearch (userInput);
+    displayOldSearches();
 }
+
+
+// Function that creates a button for each past search
+// Clicking one of these buttons should run the search again for the textcontent (city)
 
 searchForm.addEventListener("submit", runSearch);
 
-// Function that creates a button for each past search. These should be stored locally
-// Clicking one of these buttons should run the search again for the textcontent (city)
-
-let searchBtnArray = [];
+let searchBtnArray = JSON.parse(localStorage.getItem("searches"));
 let searchWrapper = document.querySelector("#search-wrapper");
+
+// Creates buttons for the entire array each time
 
 function saveSearch (userInput) {
         let searchBtn = document.createElement("button");
         searchBtn.textContent = userInput;
-        searchBtnArray.push(searchBtn.innerHTML);
-        console.log(searchBtnArray);
-        localStorage.setItem("searches", searchBtnArray);
+        console.log(userInput);
+
+        if (searchBtnArray == null) {
+            searchBtnArray = [userInput];
+            localStorage.setItem("searches", JSON.stringify(searchBtnArray));
+            console.log(searchBtnArray);
+        } else {
+            let updatedSearchArray = searchBtnArray.push(searchBtn.innerHTML);
+            localStorage.setItem("searches", JSON.stringify(updatedSearchArray));
+            console.log(searchBtnArray);
+            console.log(updatedSearchArray);
+        }
 }
 
 displayOldSearches();
 
 function displayOldSearches () {
-    let retrievedSearches = localStorage.getItem("searches");
-    console.log(retrievedSearches);
+    let retrievedSearches = JSON.parse(localStorage.getItem("searches"));
 
-    //Console appears normal; buttons not displaying on page
-
-    for (let i=0; i < searchBtnArray.length; i++) {
-        let search = searchBtnArray[i];
-        let btn = document.createElement("button");
-        btn.textContent = search;
-        btn.setAttribute("class", ".pastsearch");
-        searchWrapper.append(btn);
+    if (searchBtnArray != null) {
+        for (let i=0; i < retrievedSearches.length; i++) {
+            let search = retrievedSearches[i];
+            console.log(search);
+            let btn = document.createElement("button");
+            btn.textContent = search;
+            btn.setAttribute("class", ".pastsearch");
+            searchWrapper.append(btn);
+        }
     }
 }
 
