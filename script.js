@@ -38,7 +38,7 @@ function runSearch (event) {
 
 searchForm.addEventListener("submit", runSearch);
 
-//Save each button to the array; these buttons should be clickable
+//Saves each dynamically created button/search to the array
 
 let searchBtnArray = JSON.parse(localStorage.getItem("searches"));
 let searchWrapper = document.querySelector("#search-wrapper");
@@ -47,7 +47,10 @@ let searchList = document.querySelector("#search-list");
 function saveSearch (userInput) {
         let searchBtn = document.createElement("button");
         searchBtn.textContent = userInput;
-        searchList.append(searchBtn);
+        searchBtn.setAttribute("class", "pastsearch");
+        searchBtn.setAttribute("id", userInput);
+
+        searchWrapper.append(searchBtn);
         console.log(userInput);
 
         if (searchBtnArray == null) {
@@ -72,7 +75,7 @@ function displayOldSearches () {
             console.log(search);
             let btn = document.createElement("button");
             btn.textContent = search;
-            btn.setAttribute("class", ".pastsearch");
+            btn.setAttribute("class", "pastsearch");
             searchWrapper.append(btn);
         }
     }
