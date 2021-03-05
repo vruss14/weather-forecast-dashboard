@@ -34,20 +34,20 @@ function runSearch (event) {
     pullApiForecast (userInput);
     pull5DayForecast (userInput);
     saveSearch (userInput);
-    displayOldSearches();
 }
 
 searchForm.addEventListener("submit", runSearch);
 
-// Function that creates a button for each past search. These should be stored locally
-// Clicking one of these buttons should run the search again for the textcontent (city)
+//Save each button to the array; these buttons should be clickable
 
 let searchBtnArray = JSON.parse(localStorage.getItem("searches"));
 let searchWrapper = document.querySelector("#search-wrapper");
+let searchList = document.querySelector("#search-list");
 
 function saveSearch (userInput) {
         let searchBtn = document.createElement("button");
         searchBtn.textContent = userInput;
+        searchList.append(searchBtn);
         console.log(userInput);
 
         if (searchBtnArray == null) {
