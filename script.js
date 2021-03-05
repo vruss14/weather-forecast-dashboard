@@ -81,17 +81,17 @@ function displayOldSearches () {
     }
 }
 
-// Need to use event delegation when a dynamically created button has been clicked so that the
-// runSearch function runs again with the correct user input (which is the button's textcontent)
+// A clicked button runs a search again for that city's weather
 
-function btnSearch (event) {
+let pastSearchBtns = $("#search-wrapper");
+pastSearchBtns.on("click", ".pastsearch", repeatSearch);
+
+function repeatSearch(event) {
     let btnClicked = $(event.target);
-    let searchAgain = btnClicked.textContent;
-    document.querySelector("#search-value").value = searchAgain;
-    let userInput = searchAgain;
-
-    pullApiForecast (userInput);
-    pull5DayForecast (userInput);
+    console.log(btnClicked[0].innerHTML);
+    userInput = btnClicked[0].innerHTML;
+    document.querySelector("#search-value").value = btnClicked[0].innerHTML;
+    runSearch(event);
 }
 
 // Function that fetches the current weather data (including the UV index) for a city
