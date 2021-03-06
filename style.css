@@ -139,7 +139,6 @@
     text-align: center;
     padding: 4%;
     font-size: 48px;
-    color: white;
     font-family: 'Lora', serif;
 }
 
@@ -152,7 +151,6 @@ p {
 
 #search-wrapper {
     float: left;
-    border: 8px solid black;
     width: 30%;
     margin: 3%;
     padding: 3%;
@@ -170,7 +168,6 @@ p {
 
 #weather-wrapper {
     float: left;
-    border: 8px solid black;
     width: 60%;
     margin: 3%;
     margin-left: 0;
@@ -185,7 +182,6 @@ p {
 /* Styling for 5 day forecast */
 
 #forecast-wrapper {
-    border: 3px solid black;
     width: 95%;
     display: block;
     clear: both;
@@ -210,12 +206,10 @@ p {
 .forecast-5day {
     width: 250px;
     height: 300px;
-    border: 2px solid black;
     border-radius: 10px;
     float: left;
     margin: 15px;
     margin-top: 3%;
-    background-color: cyan;
     text-align: center;
     padding-top: 1.5%;
 }
@@ -261,7 +255,6 @@ p {
 @media screen and (max-width: 768px) {
     .forecast-5day {
       width: 66.66%;
-      background-color: red;
       padding-top: 5%;
     }
 }
@@ -291,7 +284,6 @@ p {
 
     .forecast-5day {
       width: 80%;
-      background-color: green;
       padding-top: 10%;
     }
 }

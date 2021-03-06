@@ -28,7 +28,6 @@ function runSearch (event) {
     if (!userInput) {
         return;
     } else {
-        console.log(userInput);
         pullApiForecast (userInput);
         pull5DayForecast (userInput);
         saveSearch (userInput);
@@ -91,6 +90,7 @@ function repeatSearch(event) {
 }
 
 // Function that fetches the current weather data (including the UV index) for a searched city
+// Note: This is intended to be a front-end application only, and as such, it does not have a secure place to store the API key.
 
 function pullApiForecast(userInput) {
 
