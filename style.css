@@ -1,6 +1,134 @@
+:root {
+    --maroon: #94545F;
+    --light: #E0DEAD;
+    --brightpink: #E097A3;
+    --lightblue: #80C4E0;
+    --darkblue: #5C8394;
+    --black: #000000;
+    --darkgreen: #2F4F4F;
+    --darkgray: #708090;
+    --lightgray: #D3D3D3;
+    --pastelblue: #AFEEEE;
+    --white: #FFFFFF;
+}
+
 * {
     box-sizing: border-box;
 }
+
+/* Day mode */
+
+.morning {
+    background-color: var(--lightblue);
+    color: var(--black);
+    height: 100%;
+}
+
+.morning #header {
+    background-color: var(--maroon);
+    color: var(--light);
+}
+
+.morning #search-wrapper {
+    border: 8px dashed var(--light);
+}
+
+.morning #search-value {
+    background-color: var(--light);
+}
+
+.morning #weather-wrapper {
+    border: 8px dashed var(--light);
+}
+
+.morning .pastsearch {
+    background-color: var(--maroon);
+    color: var(--light);
+    border: 3px solid var(--darkblue);
+}
+
+.morning #forecast-wrapper {
+    border: 8px dashed var(--light);
+}
+
+.morning .forecast-5day {
+    background-color: var(--darkgreen);
+    border: 5px solid var(--darkblue);
+    box-shadow: 5px 5px 2px var(--black); 
+}
+
+.morning p {
+    color: var(--white);
+}
+
+.morning #city-uv {
+    color: var(--black);
+}
+
+.morning #submit-btn {
+    color: var(--light);
+    border: var(--darkgray);
+    background-color: var(--darkgreen);
+}
+
+.morning #submit-btn:hover {
+    background-color: var(--darkblue);
+}
+
+/* Evening mode */
+
+.evening {
+    background-color: var(--black);
+    color: var(--pastelblue);
+    height: 100%;
+}
+
+.evening #header {
+    background-color: var(--darkgreen);
+    color: var(--pastelblue);
+}
+
+.evening #search-wrapper {
+    border: 8px dashed var(--pastelblue);
+}
+
+.evening #search-value {
+    background-color: var(--lightgray);
+}
+
+.evening #weather-wrapper {
+    border: 8px dashed var(--pastelblue);
+}
+
+.evening .pastsearch {
+    background-color: var(--darkgreen);
+    color: white;
+    border: 3px solid var(--darkgray);
+}
+
+.evening #forecast-wrapper {
+    border: 8px dashed var(--pastelblue);
+}
+
+.evening .forecast-5day {
+    background-color: var(--darkgray);
+    border: 5px solid var(--lightgray);
+}
+
+.evening p {
+    color: var(--black);
+}
+
+.evening #city-uv {
+    color: var(--black);
+}
+
+.evening #submit-btn:hover {
+    background-color: var(--darkgray);
+    color: white;
+}
+
+/* Page layout */
 
 #wrapper {
     display: flex;
@@ -15,9 +143,16 @@
     font-family: 'Lora', serif;
 }
 
+p {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* Styling for search box */
+
 #search-wrapper {
     float: left;
-    border: 3px solid black;
+    border: 8px solid black;
     width: 30%;
     margin: 3%;
     padding: 3%;
@@ -31,14 +166,23 @@
     padding-top: 3%;
 }
 
+/* Styling for current weather box */
+
 #weather-wrapper {
     float: left;
-    border: 3px solid black;
+    border: 8px solid black;
     width: 60%;
     margin: 3%;
     margin-left: 0;
-    padding: 3%;
+    padding: 3.75%;
 }
+
+#city-uv {
+    padding-left: 3%;
+    padding-right: 3%;
+    margin-left: 2%;
+}
+/* Styling for 5 day forecast */
 
 #forecast-wrapper {
     border: 3px solid black;
@@ -48,7 +192,6 @@
     margin-top: 3%;
     padding-top: 3%;
     padding-bottom: 3%;
-    margin-bottom: 3%;
     margin-left: 3%;
     overflow: auto;
 }
@@ -68,12 +211,13 @@
     width: 250px;
     height: 300px;
     border: 2px solid black;
+    border-radius: 10px;
     float: left;
     margin: 15px;
     margin-top: 3%;
     background-color: cyan;
     text-align: center;
-    padding-top: 3.5%;
+    padding-top: 1.5%;
 }
 
 .pastsearch {
@@ -87,6 +231,8 @@
     margin-bottom: 5px;
     width: 90%;
 }
+
+/* Responsive design */
 
 @media screen and (max-width: 1500px) {
     .forecast-5day {
@@ -128,12 +274,24 @@
 
     #search-wrapper, #weather-wrapper {
         width: 95%;
-        margin: 2%;
+    }
+
+    #search-wrapper {
+        margin-top: 15%;
+    }
+
+    #weather-wrapper {
+        margin-left: 3%;
+        margin-top: 15%;
+    }
+
+    #forecast-wrapper {
+        margin-top: 15%;
     }
 
     .forecast-5day {
       width: 80%;
       background-color: green;
-      padding-top: 15%;
+      padding-top: 10%;
     }
 }

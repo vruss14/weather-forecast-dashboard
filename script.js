@@ -1,15 +1,17 @@
 let timeOfDay = moment().format("H");
-
-// Modify CSS classes to morning tones, afternoon tones, and evening tones
-
+let container = document.querySelector("#container");
 let pageHeader = document.getElementById("header");
 
-if (timeOfDay > 9 && timeOfDay < 12) {
-    pageHeader.textContent = "Good morning!";
-} else if (timeOfDay >= 12 && timeOfDay < 17) {
-    pageHeader.textContent = "Good afternoon!";
-} else if (timeOfDay >= 17) {
-    pageHeader.textContent = "Good evening!";
+// Modify CSS classes based on time of day
+
+timeOfDay = 12;
+
+if (timeOfDay > 9 && timeOfDay < 17) {
+    container.setAttribute("class", "morning");
+    pageHeader.textContent = "Today's Weather";
+} else {
+    container.setAttribute("class", "evening");
+    pageHeader.textContent = "Tonight's Weather";
 }
 
 let city = document.querySelector("#city-name");
@@ -19,7 +21,7 @@ let wind = document.querySelector("#city-wind");
 let uv = document.querySelector("#city-uv");
 let searchForm = document.querySelector("#city-search-form");
 
-// The function that runs when someone submits a search
+// Running a search triggers the functions that fetch data from the API
 
 function runSearch (event) {
     event.preventDefault();
@@ -38,7 +40,7 @@ function runSearch (event) {
 
 searchForm.addEventListener("submit", runSearch);
 
-//Saves each dynamically created button/search to the array
+// Saves each dynamically created button/search to the array
 
 let searchBtnArray = JSON.parse(localStorage.getItem("searches"));
 let searchWrapper = document.querySelector("#search-wrapper");
@@ -51,18 +53,17 @@ function saveSearch (userInput) {
         searchBtn.setAttribute("id", userInput);
 
         searchWrapper.append(searchBtn);
-        console.log(userInput);
 
         if (searchBtnArray == null) {
             searchBtnArray = [userInput];
             localStorage.setItem("searches", JSON.stringify(searchBtnArray));
-            console.log(searchBtnArray);
         } else {
             searchBtnArray.push(searchBtn.innerHTML);
             localStorage.setItem("searches", JSON.stringify(searchBtnArray));
-            console.log(searchBtnArray);
         }
 }
+
+// Previous searches in local storage are displayed on page load
 
 displayOldSearches();
 
@@ -72,7 +73,6 @@ function displayOldSearches () {
     if (searchBtnArray != null) {
         for (let i=0; i < retrievedSearches.length; i++) {
             let search = retrievedSearches[i];
-            console.log(search);
             let btn = document.createElement("button");
             btn.textContent = search;
             btn.setAttribute("class", "pastsearch");
@@ -88,13 +88,12 @@ pastSearchBtns.on("click", ".pastsearch", repeatSearch);
 
 function repeatSearch(event) {
     let btnClicked = $(event.target);
-    console.log(btnClicked[0].innerHTML);
     userInput = btnClicked[0].innerHTML;
     document.querySelector("#search-value").value = btnClicked[0].innerHTML;
     runSearch(event);
 }
 
-// Function that fetches the current weather data (including the UV index) for a city
+// Function that fetches the current weather data (including the UV index) for a searched city
 
 function pullApiForecast(userInput) {
 
@@ -152,7 +151,6 @@ function pull5DayForecast(userInput) {
             return response.json();
         })
         .then(function(response) {
-            console.log(response)
 
             //Display results for each day in the 5 day forecast
 
