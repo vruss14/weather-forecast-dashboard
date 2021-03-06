@@ -4,8 +4,6 @@ let pageHeader = document.getElementById("header");
 
 // Modify CSS classes based on time of day
 
-timeOfDay = 12;
-
 if (timeOfDay > 9 && timeOfDay < 17) {
     container.setAttribute("class", "morning");
     pageHeader.textContent = "Today's Weather";
@@ -28,14 +26,13 @@ function runSearch (event) {
     let userInput = document.querySelector("#search-value").value;
 
     if (!userInput) {
-        console.log("Error; need to enter a city to search");
+        return;
     } else {
         console.log(userInput);
+        pullApiForecast (userInput);
+        pull5DayForecast (userInput);
+        saveSearch (userInput);
     }
-
-    pullApiForecast (userInput);
-    pull5DayForecast (userInput);
-    saveSearch (userInput);
 }
 
 searchForm.addEventListener("submit", runSearch);
@@ -164,9 +161,9 @@ function pull5DayForecast(userInput) {
 
             document.getElementById(`weatherIcon${dayCount}`).setAttribute("src", "http://openweathermap.org/img/w/" + hour.weather[0].icon + ".png");
            
-            document.getElementById(`temp${dayCount}`).textContent = hour.main.temp + "°F";
+            document.getElementById(`temp${dayCount}`).textContent = "Temperature: " + hour.main.temp + "°F";
 
-            document.getElementById(`humidity${dayCount}`).textContent = hour.main.humidity + "%";
+            document.getElementById(`humidity${dayCount}`).textContent = "Humidity: " + hour.main.humidity + "%";
         }) 
     })
 }
