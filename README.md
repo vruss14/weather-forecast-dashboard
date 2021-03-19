@@ -1,5 +1,9 @@
 # Weather Forecast Dashboard
 
+## Overview
+
+This web application pulls data from the OpenWeather API to display a particular city's current weather statistics and five-day forecast so that a user can plan accordingly for various weather conditions.
+
 ## Description
 
 For this project, I designed a fully functional web application that fetches data from the OpenWeatherMap API. When the user searches for a particular city that is listed in the API, current weather conditions for the city appear on the page, along with a five-day forecast for the city.
@@ -18,6 +22,17 @@ One of my favorite things I learned through this project was understanding how t
 
 Please find the deployed application here: https://vruss14.github.io/weather-forecast-dashboard/
 
+## Technologies Used
+
+- HTML
+- CSS
+- Bootstrap
+- JavaScript
+- jQuery
+- Moment.js
+- OpenWeather API
+- Google Fonts
+
 ## Installation
 
 No installation steps are required to view this project. To view the front-end application, visit the URL above. The application's source code can be found on GitHub here: https://github.com/vruss14/weather-forecast-dashboard
@@ -30,6 +45,10 @@ Below is a screenshot of the deployed application:
 
 ![screenshot of weather dashboard](weather-dashboard-screenshot.png)
 
+Below is a screenshot of the deployed application during the evening:
+
+![screenshot of weather dashboard](weather-night-mode.png)
+
 ## Credits
 
-Valerie Russell built the HTML, CSS, and JavaScript for the application's functionality. She also wishes to thank the learning assistant team on Bootcamp Spot for their valuable insights to her questions.
+Valerie Russell built the HTML, CSS, and JavaScript for the application's functionality. She also wishes to thank the learning assistant team on Bootcamp Spot for their valuable insights to her questions. Contact Valerie at vruss14@gmail.com.
